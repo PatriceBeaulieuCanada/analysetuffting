@@ -9,6 +9,7 @@ import Column from "primevue/column";
 import Calendar from "primevue/calendar";
 import Dropdown from "primevue/dropdown";
 import Toast from 'primevue/toast'
+import Chart from 'primevue/chart';
 
 import "primevue/resources/themes/lara-light-indigo/theme.css";
 import "primevue/resources/primevue.min.css";
@@ -23,6 +24,7 @@ app.component('Column',Column);
 app.component('Calendar',Calendar);
 app.component('Dropdown',Dropdown);
 app.component('Toast',Toast);
+app.component('Chart',Chart);
 app.mount('#app')
 
 

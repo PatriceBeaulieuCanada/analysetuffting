@@ -11,13 +11,29 @@ const chartData = ref();
 const chartOptions = ref();
 const chartData1 = ref();
 const chartOptions1 = ref();
-
+const tufter = ref();
+const param = {action:"",date1:new Date,date2:new Date,tufter:""}
+let data =[]
 
 const toast = useToast();
 
-const handleClick = () => {
-  console.log("date debut : ", startDate);
-  console.log("date fin : ", endDate);
+const handleClick = async () => {
+  
+  param.date1 = new Intl.DateTimeFormat('en-US').format(startDate.value) as any
+  param.date2 = new Intl.DateTimeFormat('en-US').format(endDate.value) as any
+
+  if(tufter!=null && tufter.value!= undefined){
+    console.log("chus passer la: "+tufter)
+    param.tufter = tufter.value.name as any;
+  }else{
+    param.tufter = "all"
+    console.log("chus passer else: "+tufter.value)
+  }  
+  param.action = 'GetAnalyse'
+  data= await UseCallApi(param)
+
+  
+
 };
 
 const infoToast = () => {
@@ -37,7 +53,7 @@ onMounted(() => {
   chartOptions1.value = setChartOptions1();
 });
 
-const tufter = ref();
+
 const tufters = ref([
   { name: "T01", id: "1" },
   { name: "T04", id: "2" },

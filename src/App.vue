@@ -1,29 +1,43 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { UseCallApi } from "./service/UseCallApi";
+import { useToast } from "primevue/usetoast";
+import "./assets/app.css";
+
+const toast = useToast();
+const handleClick = () => {
+  toast.add({
+    severity: "success",
+    summary: "PrimeTime",
+    detail: "salut",
+    life: 2000,
+  });
+};
 
 onMounted(() => {
   // UseCallApi({action:'GetEmployee'}).then((data:any)=> (employees.value = data));
 });
-
 </script>
 
 <template>
-  <div class="container">
-<h1>premier prog vue</h1>
-<Button>click</Button>
-  </div>
+  <Toast></Toast>
+    <div class="app">
+      <div class="mainContainer">
+        
+        <div class="mainHeader">
+          <Button class="bntCSS" label="Validez" @click="handleClick" icon="pi pi-user"></Button>
+        </div>
+        <div class="mainGrid">
+
+        </div>
+      </div>
+    </div>
 </template>
 
 <style scoped>
 
-.container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .mainContainer {
-  background-color: #fff;
+  background-color:#fff;
   height: 100%;
   width: 100%;
   display: grid;
@@ -36,6 +50,13 @@ onMounted(() => {
   border: 2px solid black;
   border-radius: 5px;
   grid-column: 1/11;
+  padding: 10px;
+}
+
+.bntCSS{
+  width: 85px;
+  height: 40px;
+  padding: 5px;
 }
 
 .mainGrid {

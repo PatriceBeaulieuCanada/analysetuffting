@@ -2,8 +2,8 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 
-const url = 'https://localhost:7091'
-//const url = 'http://129.11.85.2:5005'
+const url = 'http://localhost:5001'
+//const url = 'http://itvxscada:5001'
 
 export const UseCallApi = async (param:any)=>{
 
@@ -19,7 +19,7 @@ export const UseCallApi = async (param:any)=>{
 		console.log(params)
 
         try {
-			const listAnalyse = await axios.get(url+'/api/Analyse/GetAnalyseFromEmployee?'+queryString.stringify(params));		
+			const listAnalyse = await axios.get(url+'/api/TufterAnalyse/GetAnalyseFromEmployee?'+queryString.stringify(params));		
 			return listAnalyse.data;
 		} catch (err) {
 			// Handle Error Here

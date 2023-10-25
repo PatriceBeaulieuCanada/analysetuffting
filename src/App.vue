@@ -13,7 +13,7 @@ const chartData1 = ref();
 const chartOptions1 = ref();
 const tufter = ref();
 const param = {action:"",date1:new Date,date2:new Date,tufter:""}
-let data =[]
+let data ={histstopReasons:[]}
 
 const toast = useToast();
 
@@ -31,8 +31,8 @@ const handleClick = async () => {
   }  
   param.action = 'GetAnalyse'
   data= await UseCallApi(param)
-
-  
+  stopReasons.value = data.histstopReasons as any
+  console.log(data)
 
 };
 
@@ -199,17 +199,19 @@ const setChartOptions1 = () => {
           icon="pi pi-chart-bar"
         ></Button>
       </div>
-      <div class="mainGrid1">
-        <div class="card">
-          <DataTable :value="stopReasons" tableStyle="min-width: 50rem">
-            <Column field="code" header="Début arrêt"></Column>
-            <Column field="name" header="Fin arrêt"></Column>
+      <div class="mainGrid1">        
+          <DataTable class="gridCSS" :value="stopReasons" tableStyle="min-width: 50rem" scrollable scrollHeight="100%" showGridlines>
+            <Column field="stopTime" header="Début arrêt">
+              <template #body="{ data }">{{ new Date(data.stopTime).toLocaleString() }}</template>
+            </Column>
+            <Column field="restartTime" header="Fin arrêt">
+              <template #body="{ data }">{{ new Date(data.restartTime).toLocaleString() }}</template>
+            </Column>
             <Column field="category" header="Durée"></Column>
             <Column field="quantity" header="Opérateur"></Column>
-            <Column field="category" header="Raison"></Column>
-            <Column field="quantity" header="Commentaire"></Column>
-          </DataTable>
-        </div>
+            <Column field="humainStopReason.name" header="Raison"></Column>
+            <Column field="comment" header="Commentaire"></Column>
+          </DataTable>        
       </div>
       <div class="mainGrid2">
         <Chart type="pie" :data="chartData" :options="chartOptions" class="chartCSS" />
@@ -268,6 +270,11 @@ const setChartOptions1 = () => {
   grid-column: 1/7;
   grid-row: 2/4;
   padding: 5px;
+}
+
+.mainGrid1 .gridCSS{
+  height: 100%;
+  width: 100%;
 }
 
 .mainGrid2 {

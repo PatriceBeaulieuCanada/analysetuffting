@@ -2,8 +2,8 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 
-const url = 'http://localhost:5001'
-//const url = 'http://itvxscada:5001'
+//const url = 'http://localhost:5001'
+const url = 'http://itvxscada:5001'
 
 export const UseCallApi = async (param:any)=>{
 
@@ -16,7 +16,7 @@ export const UseCallApi = async (param:any)=>{
 			tufter:param.tufter
 		}
 
-		console.log(params)
+		//console.log(params)
 
         try {
 			const listAnalyse = await axios.get(url+'/api/TufterAnalyse/GetAnalyseFromEmployee?'+queryString.stringify(params));		
